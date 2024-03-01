@@ -26,6 +26,20 @@ const initPlayers = (players) => {
     let detailedPlayers = [];
     // Create players using for loop
     // Type your code here
+    for(let i=0;i<players.length;i++){
+        var obj={}
+        obj.name=players[i]
+        obj.strength=getRandomStrength()
+        obj.image=`../images/super-${i+1}.png`
+
+        if(i%2==0){
+            obj.type="hero"
+        }
+        else{
+            obj.type="villain"
+        }
+        detailedPlayers.push(obj)
+    }
 
     return detailedPlayers;
 }
@@ -34,6 +48,8 @@ const initPlayers = (players) => {
 const getRandomStrength = () => {
     // Return a random integer (0,100]
     // Note: You can use Math.random() and Math.ceil()
+    let strengthNum=Math.floor((Math.random()*100)+1)
+    return strengthNum
 }
 
 const buildPlayers = (players, type) => {
@@ -42,6 +58,17 @@ const buildPlayers = (players, type) => {
     // Loop through players and accumulate HTML template
     // depending of type of player(hero|villain)
     // Type your code here
+    for(let i=0;i<players.length;i++){
+        if(players[i].type==type){
+            let text=`<div class="player">
+            <img src="${players[i].image}" alt="">
+            <div class="name">${players[i].name}</div>
+            <div class="strength">${players[i].strength}</div>
+            </div>`
+
+            fragment+=text
+        }
+    }
 
     return fragment;
 }
